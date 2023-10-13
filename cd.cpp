@@ -36,14 +36,13 @@ int main( void ){
                     if( check1[i][k] == 0 ){ // i - sprawdzana kombinacja tytulow
                         int flag = 1; //mamy match
                         for( int l = 1; l < dl; l++ ){ //ilosc iter w jednym elemencie
-                            if( titles[( i + j ) % input][l] != check[k+l] || check1[i][k+l] != 0 ){ //jak coś się nie zgadza to przerwie i flag = 0
+                            if( titles[( i + j ) % input][l] != check[k + l] || check1[i][k + l] != 0 ){ //jak coś się nie zgadza to przerwie i flag = 0
                                 flag = 0;
                                 break;
                             }
                         }
                         if( flag == 1 ){ //jak match to dla odpowiedniej kombinacji uzupelniamy
-                            for( int l = 0; l < dl; l++ ) check1[i][k+l] = ( i + j ) % input;
-                            break;
+                            for( int l = 0; l < dl; l++ ) check1[i][k + l] = ( ( i + j ) % input ) + 1;
                         }
                     } 
                 }
@@ -52,9 +51,9 @@ int main( void ){
     }
     
     for( int i = 0; i < input; i++ ){
-         for( int j = 0; j < ile * dl; i++ ){ //jeśli na koniec cała tablica nie została uzupełniona to bajo
+         for( int j = 0; j < ile * dl; j++ ){ //jeśli na koniec cała tablica nie została uzupełniona to bajo
             if( check1[i][j] == 0 ){
-                picker[input] = 0; //jak nie spelnil warunkow to "usuwamy"
+                picker[i] = 0; //jak nie spelnil warunkow to "usuwamy"
                 break;
             }
         }
@@ -62,7 +61,7 @@ int main( void ){
 
     for( int i = 0; i < input; i++ ){//sprawdzamy dla kazdej mozliwej kombinacji tytulow
         if( picker[i] == 1 ){
-            cout << "YES" << i << endl;
+            cout << "YES" << endl;
             int keeper = 0;
             for( int j = 0; j < ile * dl; j++ ){
                 if( check1[i][j] != keeper ){
@@ -70,7 +69,7 @@ int main( void ){
                     keeper = check1[i][j];
                 }
             }
-            
+            return 0;
         }
     }
 
